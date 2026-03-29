@@ -7,7 +7,7 @@ pub trait SmartThermometerTrait {
     fn new(current_temperature: f32) -> Self;
     fn get_temperature(&self) -> f32;
     fn get_thermometer(&self) -> &SmartThermometer;
-    fn state(&self) -> String;
+    fn report(&self) -> String;
 }
 
 impl SmartThermometerTrait for SmartThermometer {
@@ -23,7 +23,7 @@ impl SmartThermometerTrait for SmartThermometer {
         self
     }
 
-    fn state(&self) -> String {
+    fn report(&self) -> String {
         let mut report: String = String::new();
         report.push_str(&format!("Current temperature: {}°C", self.current_temperature));
         

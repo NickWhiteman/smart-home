@@ -11,10 +11,10 @@ impl SmartDevice {
         device
     }
 
-    pub fn state(&self) -> String {
+    pub fn report(&self) -> String {
         match self {
-            SmartDevice::Thermometer(thermometer) => thermometer.state(),
-            SmartDevice::Plug(plug) => plug.state(),
+            SmartDevice::Thermometer(thermometer) => thermometer.report(),
+            SmartDevice::Plug(plug) => plug.report(),
             _ => String::from("Unknown device"),
         }
     }

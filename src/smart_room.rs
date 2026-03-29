@@ -33,7 +33,7 @@ impl SmartRoom {
     pub fn get_report_rooms(&self) -> String {
         let mut report = String::new();
         for (index, device) in self.devices.iter().enumerate() {
-            report.push_str(&format!("Device {}: {:?}\n", index, device.state()));
+            report.push_str(&format!("Device {}: {:?}\n", index, device.report()));
         }
         report
     }
@@ -42,19 +42,19 @@ impl SmartRoom {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::smart_plug::SmartPlugTrait;
-    use crate::smart_thermometer::SmartThermometerTrait;
+    use crate::smart_plug::{SmartPlugTrait, SmartPlug};
+    use crate::smart_thermometer::{SmartThermometerTrait, SmartThermometer};
 
     #[test]
     fn test_smart_room() {
-        let thermometer = SmartThermometerTrait::new(42.0);
-        let plug = SmartPlugTrait::new();
+        let thermometer = SmartThermometer::new(42.0);
+        let plug = SmartPlug::new();
         let devices = vec![
-            SmartDevice::Thermometer(thermometer),
-            SmartDevice::Plug(plug),
+            SmartDevice::new(SmartDevice::Thermometer(thermometer)),
+            SmartDevice::new(SmartDevice::Plug(plug)),
         ];
         let room = SmartRoom::new(devices);
-        assert_eq!(room.get_device(0).state(), "Current temperature: 42°C");
-        assert_eq!(room.get_device(1).state(), "Current state: Off");
+        assert_eq!(room.get_device(0).report(), "Current temperature: 42°C");
+        assert_eq!(room.get_device(1).report(), "Current state: Off");
     }
 }

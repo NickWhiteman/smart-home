@@ -1,5 +1,5 @@
-mod smart_thermometer;
-mod smart_plug;
-mod smart_device;
-mod smart_room;
-mod smart_home;
+pub mod smart_thermometer;
+pub mod smart_plug;
+pub mod smart_device;
+pub mod smart_room;
+pub mod smart_home;

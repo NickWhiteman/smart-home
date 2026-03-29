@@ -10,7 +10,7 @@ pub trait SmartPlugTrait {
     fn turn_off(&mut self);
     fn current_power(&self) -> f32;
     fn get_plug(&self) -> &SmartPlug;
-    fn state(&self) -> String;
+    fn report(&self) -> String;
 }
 
 impl SmartPlugTrait for SmartPlug {
@@ -44,7 +44,7 @@ impl SmartPlugTrait for SmartPlug {
         self
     }
 
-    fn state(&self) -> String {
+    fn report(&self) -> String {
         let mut report: String = String::new();
         report.push_str(&format!("Current state: {}", if self.is_turn_on { "On" } else { "Off" }));
         

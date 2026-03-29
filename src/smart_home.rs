@@ -1,6 +1,6 @@
 use crate::smart_room::SmartRoom;
 
-pub(crate) struct SmartHome {
+pub struct SmartHome {
     rooms: Vec<SmartRoom>,
 }
 

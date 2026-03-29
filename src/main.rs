@@ -1,33 +1,37 @@
-use crate::{smart_plug::SmartPlugTrait, smart_thermometer::SmartThermometerTrait};
-mod smart_thermometer;
-mod smart_plug;
-mod smart_device;
-mod smart_room;
-mod smart_home;
+use smart_home::{
+    smart_device::SmartDevice, 
+    smart_plug::SmartPlug, 
+    smart_plug::SmartPlugTrait, 
+    smart_room::SmartRoom, 
+    smart_thermometer::SmartThermometer,
+    smart_thermometer::SmartThermometerTrait,
+    smart_home::SmartHome,
+};
+
 
 
 fn main() {
-    let thermometer = smart_thermometer::SmartThermometer::new(42.0);
-    let plug = smart_plug::SmartPlug::new();
+    let thermometer = SmartThermometer::new(42.0);
+    let plug = SmartPlug::new();
     let devices = vec![
-        smart_device::SmartDevice::Thermometer(thermometer),
-        smart_device::SmartDevice::Plug(plug),
+        SmartDevice::Thermometer(thermometer),
+        SmartDevice::Plug(plug),
     ];
-    let room = smart_room::SmartRoom::new(devices);
-    let room1 = smart_room::SmartRoom::new(
+    let room = SmartRoom::new(devices);
+    let room1 = SmartRoom::new(
         vec![
-            smart_device::SmartDevice::Thermometer(smart_thermometer::SmartThermometer::new(42.0)), 
-            smart_device::SmartDevice::Plug(smart_plug::SmartPlug::new()), 
-            smart_device::SmartDevice::Plug(smart_plug::SmartPlug::new())
+            SmartDevice::Thermometer(SmartThermometer::new(42.0)), 
+            SmartDevice::Plug(SmartPlug::new()), 
+            SmartDevice::Plug(SmartPlug::new())
         ]
     );
-    let room2 = smart_room::SmartRoom::new(
+    let room2 = SmartRoom::new(
         vec![
-            smart_device::SmartDevice::Plug(smart_plug::SmartPlug::new()), 
-            smart_device::SmartDevice::Plug(smart_plug::SmartPlug::new())
+            SmartDevice::Plug(SmartPlug::new()), 
+            SmartDevice::Plug(SmartPlug::new())
         ]
     );
-    let mut home = smart_home::SmartHome::new(vec![room, room1, room2]);
+    let mut home = SmartHome::new(vec![room, room1, room2]);
     println!("Report: {}", home.get_report_home());
     home.get_mut_room(2).get_mut_device(0).toggle_plug();
     println!("Report after toggling plug in room 2: {}", home.get_report_home());
