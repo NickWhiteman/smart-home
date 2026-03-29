@@ -1,10 +1,8 @@
 use smart_home::{
     smart_device::SmartDevice, 
-    smart_plug::SmartPlug, 
-    smart_plug::SmartPlugTrait, 
+    smart_plug::{SmartPlug, SmartPlugTrait}, 
     smart_room::SmartRoom, 
-    smart_thermometer::SmartThermometer,
-    smart_thermometer::SmartThermometerTrait,
+    smart_thermometer::{SmartThermometer, SmartThermometerTrait},
     smart_home::SmartHome,
 };
 
